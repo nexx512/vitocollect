@@ -24,7 +24,7 @@
   "homepage": "https://github.com/nexx512/vitocollect#readme",
   "dependencies": {
     "influx": "^5.0.7",
-    "vcontrol": "file:///home/juergen/Projekte/RasPi/node-vcontrol"
+    "vcontrol": "0.0.1"
   },
   "devDependencies": {
     "coffeescript": "^2.3.2",
