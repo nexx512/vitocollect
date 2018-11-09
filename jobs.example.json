@@ -1,0 +1,52 @@
+[
+  {
+    "measurement": "Umgebungstemperaturen",
+    "interval": 600000,
+    "fields": {
+      "Außentemperatur": {
+        "type": "FLOAT",
+        "command": "getTempA"
+      },
+      "Vorlauftemperatur": {
+        "type": "FLOAT",
+        "command": "getTempVListM1"
+      }
+    }
+  },
+  {
+    "measurement": "Heizungstemperaturen",
+    "interval": 60000,
+    "fields": {
+      "Kesseltemperatur": {
+        "type": "FLOAT",
+        "command": "getTempKist"
+      },
+      "Speichertemperatur": {
+        "type": "FLOAT",
+        "command": "getTempSpu"
+      },
+      "Vorlauftemperatur": {
+        "type": "FLOAT",
+        "command": "getTempVListM1"
+      },
+      "Warmwassertemperatur": {
+        "type": "FLOAT",
+        "command": "getTempWWist"
+      }
+    }
+  },
+  {
+    "measurement": "Lebenszyklus",
+    "interval": 600000,
+    "fields": {
+      "Gasverbrauch": {
+        "type": "FLOAT",
+        "command": "getOelverbrauch"
+      },
+      "Brennerstunden": {
+        "type": "FLOAT",
+        "command": "getBrennerStunden1"
+      }
+    }
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "influx": {
+    "host": "vitodens",
+    "database": "vitodens"
+  },
+  "vcontrold": {
+    "host": "vitodens",
+    "port": 3002
+  }
+}
