@@ -14,7 +14,9 @@
   "keywords": [
     "viessmann",
     "vito",
-    "timeseries"
+    "openv",
+    "vcontrold",
+    "influx"
   ],
   "author": "Jürgen Diez",
   "license": "GPL-3.0",
