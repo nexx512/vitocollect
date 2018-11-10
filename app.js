@@ -1,4 +1,4 @@
-const VControlClient = require("vcontrol")
+const VControlClient = require("vcontrol-client")
 const Influx = require("influx")
 
 const Jobs = require("./src/jobs")
