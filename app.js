@@ -22,7 +22,8 @@ async function main() {
       try {
         let vControlClient = new VControlClient({
           host: Config.vcontrold.host,
-          port: Config.vcontrold.port
+          port: Config.vcontrold.port,
+          timeout: 10000
         })
         let dataCollector = new DataCollector(vControlClient)
 
@@ -33,7 +34,7 @@ async function main() {
           fields: fields
         }])
       } catch (e) {
-        console.error(e)
+        console.error(new Date().toString() + " " + e)
       }
     }, job.interval);
   })
