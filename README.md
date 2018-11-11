@@ -3,11 +3,14 @@
 Collect data from [VControlD](https://github.com/openv/vcontrold) periodically and store the collected data
 in an [Influx](https://www.influxdata.com/) database.
 
-Details on how to set up the hard- and software to get a VControlD server running can be found in the [OpenV-Wiki](https://github.com/openv/openv/wiki).
-
 ## Disclaimer
 
 You use this software at your own risk. I can not be held liable for anything that happens to your heating system, including any damage, by the use of this software.
+
+## Prerequisites
+
+You need a running vcontrold server and an influx database.
+Details on how to set up the hard- and software to get a vcontrold server running can be found in the [OpenV-Wiki](https://github.com/openv/openv/wiki).
 
 ## Installation
 
