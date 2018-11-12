@@ -1,8 +1,9 @@
 {
   "name": "vitocollect",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Collect data from vcontrold and store in Influx database",
   "main": "app.js",
+  "bin": "./app.js",
   "scripts": {
     "test": "mocha test/**/*.coffee",
     "start": "node app.js"
@@ -26,7 +27,7 @@
   "homepage": "https://github.com/nexx512/vitocollect#readme",
   "dependencies": {
     "influx": "^5.0.7",
-    "vcontrol-client": "0.0.5"
+    "vcontrol": "0.0.6"
   },
   "devDependencies": {
     "coffeescript": "^2.3.2",

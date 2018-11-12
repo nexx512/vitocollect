@@ -1,4 +1,6 @@
-const VControlClient = require("vcontrol-client")
+#!/usr/bin/env node
+
+const VControl = require("vcontrol")
 const Influx = require("influx")
 
 const Jobs = require("./src/jobs")
@@ -20,12 +22,12 @@ async function main() {
   jobs.jobs.forEach((job) => {
     setInterval(async () => {
       try {
-        let vControlClient = new VControlClient({
+        let vControl = new VControl({
           host: Config.vcontrold.host,
           port: Config.vcontrold.port,
           timeout: 10000
         })
-        let dataCollector = new DataCollector(vControlClient)
+        let dataCollector = new DataCollector(vControl)
 
         let fields = await dataCollector.fetchData(job.fields)
         await influxClient.writePoints([{

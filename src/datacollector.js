@@ -1,16 +1,16 @@
 module.exports = class DataCollector {
-  constructor(vControlClient) {
-    this.vControlClient = vControlClient
+  constructor(vControl) {
+    this.vControl = vControl
   }
 
   async fetchData(fields) {
-    await this.vControlClient.connect()
+    await this.vControl.connect()
 
     let data = {}
 
     for (let fieldName in fields) {
       let field = fields[fieldName]
-      let vControlResponse = await this.vControlClient.getData(field.command)
+      let vControlResponse = await this.vControl.getData(field.command)
       switch (field.type) {
         case "FLOAT": data[fieldName] = Number.parseFloat(vControlResponse)
           break;
@@ -18,7 +18,7 @@ module.exports = class DataCollector {
       }
     }
 
-    await this.vControlClient.close()
+    await this.vControl.close()
     return data
   }
 }

@@ -6,16 +6,16 @@ DataCollector = require("../src/datacollector")
 
 describe "A DataCollector object", =>
   before =>
-    @vControlClient = new VControlClient({})
-    @vControlClientMock = sinon.mock(@vControlClient)
-    @dataCollector = new DataCollector(@vControlClient)
+    @vControl = new VControlClient({})
+    @vControlMock = sinon.mock(@vControl)
+    @dataCollector = new DataCollector(@vControl)
 
   it "should collect data for all fields from vcontrol", =>
-    getDataStub = sinon.stub(@vControlClient, "getData")
+    getDataStub = sinon.stub(@vControl, "getData")
     getDataStub.withArgs("getFloat").returns(Promise.resolve("1.2 Grad Celsius\n"))
     getDataStub.withArgs("getString").returns(Promise.resolve("Data\n"))
-    @vControlClientMock.expects("connect").once()
-    @vControlClientMock.expects("close").once()
+    @vControlMock.expects("connect").once()
+    @vControlMock.expects("close").once()
 
     # Use fields with all available types
     fields = {
@@ -35,4 +35,4 @@ describe "A DataCollector object", =>
       "FloatField": 1.2
       "StringField": "Data"
     }
-    @vControlClientMock.verify()
+    @vControlMock.verify()
