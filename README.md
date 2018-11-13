@@ -14,19 +14,20 @@ Details on how to set up the hard- and software to get a vcontrold server runnin
 
 ## Installation
 
-Checkout from `https://github.com/nexx512/vitocollect.git`.
+Install with `npm install -g vitocollect` if you want the app to be in your path or `npm install vitocollect` for a local installatino in the current folder.
 
-Copy `config/config.example.json` to `config/config.json` and adjust to your needs.
+Copy `<node_modules directory>/config/config.example.json` to `<node_modules directory>/vitocollect/config/config.json` and adjust to your needs.
 
-Copy `jobs.example.json` to `jobs.json` and adjust to your needs.
+Copy `<node_modules directory>/vitocollect/jobs.example.json` to `<node_modules directory>/vitocollect/jobs.json` and adjust to your needs.
 
 ## Start
 
-Start service with
+If installed globally, then you can start the application with
 ```
-npm start
+vitocollect
 ```
-or
+
+If you installed it locally, then start it with
 ```
-node app.js
+./node_modules/.bin/vitocollect
 ```

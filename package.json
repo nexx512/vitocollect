@@ -6,7 +6,7 @@
   "bin": "./app.js",
   "scripts": {
     "test": "mocha test/**/*.coffee",
-    "start": "node app.js"
+    "start": "./app.js"
   },
   "repository": {
     "type": "git",
@@ -33,5 +33,8 @@
     "coffeescript": "^2.3.2",
     "should": "^13.2.3",
     "sinon": "^7.1.1"
+  },
+  "engines": {
+    "node" : ">=7.0.0"
   }
 }

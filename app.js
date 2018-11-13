@@ -2,14 +2,15 @@
 
 const VControl = require("vcontrol")
 const Influx = require("influx")
+const path = require("path")
 
 const Jobs = require("./src/jobs")
 const DataCollector = require("./src/datacollector")
 
-global.Config = require("./config/config.json")
+global.config = require(path.join(__dirname, "/config/config.json"))
 
 async function main() {
-  const jobs = new Jobs("./jobs.json")
+  const jobs = new Jobs(path.join(__dirname, "./jobs.json"))
   const schema = jobs.getInfluxSchema()
 
   let influxClient = new Influx.InfluxDB({
