@@ -7,7 +7,7 @@ const path = require("path")
 const Jobs = require("./src/jobs")
 const DataCollector = require("./src/datacollector")
 
-global.config = require(path.join(__dirname, "/config/config.json"))
+global.Config = require(path.join(__dirname, "/config/config.json"))
 
 async function main() {
   const jobs = new Jobs(path.join(__dirname, "./jobs.json"))
