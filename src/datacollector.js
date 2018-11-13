@@ -10,11 +10,17 @@ module.exports = class DataCollector {
 
     for (let fieldName in fields) {
       let field = fields[fieldName]
-      let vControlResponse = await this.vControl.getData(field.command)
-      switch (field.type) {
-        case "FLOAT": data[fieldName] = Number.parseFloat(vControlResponse)
-          break;
-        default: data[fieldName] = vControlResponse.split("\n")[0]
+      try {
+        let vControlResponse = await this.vControl.getData(field.command)
+        switch (field.type) {
+          case "FLOAT": data[fieldName] = Number.parseFloat(vControlResponse)
+            break;
+          default: data[fieldName] = vControlResponse.split("\n")[0]
+        }
+      } catch (e) {
+        console.error(e.toString())
+        data = null
+        break;
       }
     }
 

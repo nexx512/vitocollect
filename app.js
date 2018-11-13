@@ -31,15 +31,19 @@ async function main() {
         let dataCollector = new DataCollector(vControl)
 
         let fields = await dataCollector.fetchData(job.fields)
-        await influxClient.writePoints([{
-          measurement: job.measurement,
-          tags: {},
-          fields: fields
-        }])
+
+        if (fields) {
+          await influxClient.writePoints([{
+            measurement: job.measurement,
+            tags: {},
+            fields: fields
+          }])
+        }
       } catch (e) {
-        console.error(new Date().toString() + " " + e)
+        console.error(e.toString())
       }
     }, job.interval);
+    console.log("Installed job " + job.measurement)
   })
 
 }
