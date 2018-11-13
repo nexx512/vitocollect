@@ -1,7 +1,7 @@
 require("should")
 sinon = require("sinon")
 
-VControlClient = require("vcontrol-client")
+VControlClient = require("vcontrol")
 DataCollector = require("../src/datacollector")
 
 describe "A DataCollector object", =>
