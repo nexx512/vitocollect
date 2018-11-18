@@ -27,7 +27,7 @@
   "homepage": "https://github.com/nexx512/vitocollect#readme",
   "dependencies": {
     "influx": "^5.0.7",
-    "vcontrol": "0.0.6"
+    "vcontrol": "0.0.8"
   },
   "devDependencies": {
     "coffeescript": "^2.3.2",
