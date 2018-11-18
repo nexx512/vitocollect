@@ -9,6 +9,15 @@ const DataCollector = require("./src/datacollector")
 
 global.Config = require(path.join(__dirname, "/config/config.json"))
 
+function log(level, msg) {
+  console.log(Date() + " [" + level + "] " + msg)
+}
+
+global.Log = {
+  error: (msg) => log("error", msg),
+  debug: (msg) => log("debug", msg)
+}
+
 async function main() {
   const jobs = new Jobs(path.join(__dirname, "./jobs.json"))
   const schema = jobs.getInfluxSchema()
@@ -21,13 +30,15 @@ async function main() {
 
 
   jobs.jobs.forEach((job) => {
+    // Reuse same client to enfoce an exception when connecting if the previous job didn't finish yet.
+    // This prevents acummulating vcontrold tasks on the server if the interval time is too small to execute the jobs.
+    let vControl = new VControl({
+      host: Config.vcontrold.host,
+      port: Config.vcontrold.port,
+      debug: true
+    })
     setInterval(async () => {
       try {
-        let vControl = new VControl({
-          host: Config.vcontrold.host,
-          port: Config.vcontrold.port,
-          timeout: 10000
-        })
         let dataCollector = new DataCollector(vControl)
 
         let fields = await dataCollector.fetchData(job.fields)
@@ -40,10 +51,10 @@ async function main() {
           }])
         }
       } catch (e) {
-        console.error(e.toString())
+        Log.error(e.toString())
       }
     }, job.interval);
-    console.log("Installed job " + job.measurement)
+    Log.debug("Installed job " + job.measurement)
   })
 
 }

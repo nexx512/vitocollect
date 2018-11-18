@@ -18,7 +18,7 @@ module.exports = class DataCollector {
           default: data[fieldName] = vControlResponse.split("\n")[0]
         }
       } catch (e) {
-        console.error(e.toString())
+        Log.error(e.toString())
         data = null
         break;
       }
