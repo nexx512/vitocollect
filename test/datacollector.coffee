@@ -4,6 +4,11 @@ sinon = require("sinon")
 VControlClient = require("vcontrol")
 DataCollector = require("../src/datacollector")
 
+global.Log = {
+  error: () => {}
+  debug: () => {}
+}
+
 describe "A DataCollector object", =>
   beforeEach =>
     @vControl = new VControlClient({})
