@@ -1,6 +1,6 @@
 {
   "name": "vitocollect",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Collect data from vcontrold and store in Influx database",
   "main": "app.js",
   "bin": "./app.js",
