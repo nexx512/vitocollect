@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 
-const VControl = require("vcontrol")
-const Influx = require("influx")
-const path = require("path")
+const VControl = require("vcontrol");
+const Influx = require("influx");
+const path = require("path");
 
-const Jobs = require("./src/jobs")
-const DataCollector = require("./src/datacollector")
+const Jobs = require("./src/jobs");
+const DataCollector = require("./src/datacollector");
 
-global.Config = require(path.join(__dirname, "/config/config.json"))
+const debug = !!process.env.DEBUG
+
+global.Config = require(path.join(__dirname, "/config/config.json"));
 
 function log(level, msg) {
   console.log(Date() + " [" + level + "] " + msg)
@@ -15,18 +17,18 @@ function log(level, msg) {
 
 global.Log = {
   error: (msg) => log("error", msg),
-  debug: (msg) => log("debug", msg)
+  debug: (msg) => {
+    if (debug) log("debug", msg)
+  }
 }
 
 async function main() {
-  const jobs = new Jobs(path.join(__dirname, "./jobs.json"))
-  const schema = jobs.getInfluxSchema()
+  const jobs = new Jobs(path.join(__dirname, "./jobs.json"));
+  const schema = jobs.getInfluxSchema();
 
-  let influxClient = new Influx.InfluxDB({
-    host: Config.influx.host,
-    database: Config.influx.database,
-    schema: schema
-  })
+  let influxConfig = Config.influx;
+  influxConfig.schema = schema;
+  let influxClient = new Influx.InfluxDB(influxConfig);
 
 
   jobs.jobs.forEach((job) => {
@@ -35,28 +37,28 @@ async function main() {
     let vControl = new VControl({
       host: Config.vcontrold.host,
       port: Config.vcontrold.port,
-      debug: true
-    })
+      debug: debug
+    });
     setInterval(async () => {
       try {
-        let dataCollector = new DataCollector(vControl)
+        let dataCollector = new DataCollector(vControl);
 
-        let fields = await dataCollector.fetchData(job.fields)
+        let fields = await dataCollector.fetchData(job.fields);
 
         if (fields) {
           await influxClient.writePoints([{
             measurement: job.measurement,
             tags: {},
             fields: fields
-          }])
+          }]);
         }
       } catch (e) {
-        Log.error(e.toString())
+        Log.error(e.toString());
       }
     }, job.interval);
-    Log.debug("Installed job " + job.measurement)
+    Log.debug("Installed job " + job.measurement);
   })
 
 }
 
-main()
+main();
